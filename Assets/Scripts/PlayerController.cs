@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -6,7 +7,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
 
-    private float jumpForce = 10f;
+    public float jumpForce = 10f;
+    public float jumpLength = 10f;
     private bool isGrounded;
 
     void Start()
@@ -36,12 +38,18 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Handle jumping
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && animator.GetBool("isRunning"))
         {
             Debug.Log("Jump!");
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            // rb.linearVelocity = new Vector2(rb.linearVelocity.x * jumpLength, 0);
             isGrounded = false;
             animator.SetBool("Jump", true);
+        } else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StaticSceneController staticSceneController = FindFirstObjectByType<StaticSceneController>();
+            staticSceneController.scrollSpeed = 1f;
+            animator.SetBool("isRunning", true);
         }
     }
 
@@ -54,4 +62,16 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isGrounded", true);
         }
     }
+
+    public void Hit()
+    {
+        Debug.Log("Player hit");
+        animator.SetTrigger("Fall");
+        animator.SetBool("isRunning", false);
+
+        StaticSceneController staticSceneController = FindFirstObjectByType<StaticSceneController>();
+        staticSceneController.scrollSpeed = 0f;
+
+    }
+
 }

@@ -1,34 +1,24 @@
-# Unity generated files
-Library/
+# Unity
 Temp/
+Library/
 Obj/
-Build/
 Builds/
-Logs/
-
-# Visual Studio / Rider files
-*.csproj
 *.unityproj
 *.sln
-*.suo
 *.user
-*.userprefs
 *.pidb
-*.booproj
-*.svd
+*.suo
 *.pdb
 *.opendb
+*.DS_Store
+*.orig
+*.meta.orig
 
-# OS generated files
-.DS_Store
-.Trashes
-._*
+# Visual Studio / Rider
+.vs/
+.idea/
 
-# Editor specific files
-# For example, if you use Blender and save files in your project
-*.blend1
-*.blend2
-*.blend3
-
-# Other potential temporary files or build outputs
-# Add specific folders or file types as needed
+# Custom additions (example)
+MyCustomLogs/
+Recordings/
+Logs/

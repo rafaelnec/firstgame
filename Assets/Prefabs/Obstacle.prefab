@@ -10,14 +10,15 @@ GameObject:
   m_Component:
   - component: {fileID: 1899913280858242741}
   - component: {fileID: 7933254891119623498}
-  - component: {fileID: 7291718368784975548}
+  - component: {fileID: 3535647390241922604}
+  - component: {fileID: 7050689025912758369}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1899913280858242741
 Transform:
   m_ObjectHideFlags: 0
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1719552727444720193}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.76, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -91,7 +92,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7291718368784975548
+--- !u!61 &3535647390241922604
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719552727444720193}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.061741054, y: -0.13505709}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 2
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.5549272, y: 0.7299056}
+  m_EdgeRadius: 0
+--- !u!114 &7050689025912758369
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,8 +147,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 1719552727444720193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b3bd9d82c7faae44ad125eb9ed95471, type: 3}
+  m_Script: {fileID: 11500000, guid: 4cd5a99fe6786e64b8c7a1f996aea953, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObstacleController
-  obstacleTiles: []
-  spriteRenderer: {fileID: 7933254891119623498}
+  m_EditorClassIdentifier: Assembly-CSharp::ObstaclePrefab
+  obstacleSprites:
+  - {fileID: -6940293328096504433, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: 3746935655882810301, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: -2260697099759574728, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: -1857519009016628296, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: -2556346822958689933, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: 114107025550881738, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: 1612252475987783452, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: 6133582529739063541, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: 8930182985808030838, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: -9081218422203859894, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: -345231465959015461, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: 7107251678592989930, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: 1383626898866713395, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: -2052919242413823105, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: 8209491805761800435, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: -8426469122778591344, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: -3157432284086773462, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: 5818224357304026935, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: -8690065010125426303, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: -4925843244128929988, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: 1170604001840506005, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: -1843308405658299083, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: 7978662123494839925, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: -5291700123334761287, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: 2196971166971043952, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
+  - {fileID: -4698122111568360742, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}

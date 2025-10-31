@@ -5,7 +5,7 @@ public class BackgroundController : MonoBehaviour
 {
     public float screenPosition = -0.355f;
 
-    [SerializeField] private float scrollSpeed = 1f;
+    public float scrollSpeed = 0f;
 
     // changed: use int for phase index
     [SerializeField] private int currentPhase = 0;
@@ -59,6 +59,8 @@ public class BackgroundController : MonoBehaviour
     public void AdvancePhase()
     {
 
+        Debug.Log("Advancing background phase.");
+        
         if (backgroundSprites == null || backgroundSprites.Count == 0) return;
 
         currentPhase++;
