@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
-    public float screenPosition = -0.53f;
+    public float screenPosition = -0.35f;
 
     [SerializeField] private float scrollSpeed = 1f;
     private Vector3 startPosition;
