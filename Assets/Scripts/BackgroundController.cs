@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BackgroundController : MonoBehaviour
 {
@@ -69,7 +70,7 @@ public class BackgroundController : MonoBehaviour
         if (currentPhase >= backgroundSprites.Count)
         {
             currentPhase = 0;
-            spriteRenderer.sortingOrder = 0;
+            spriteRenderer.sortingOrder = 1;
         }
 
         if (spriteRenderer != null)
@@ -77,9 +78,25 @@ public class BackgroundController : MonoBehaviour
 
         if (resetPositionOnAdvance)
             transform.position = startPosition;
+            
 
         Debug.Log($"Background advanced to phase {currentPhase}");
+
+        this.ReloadCurrentScene();
     }
+
+    private void ReloadCurrentScene()
+    {
+        CollectableController collectableController = FindFirstObjectByType<CollectableController>();
+        collectableController.ResetSpawnedState();
+
+        ObstacleController obstacleController = FindFirstObjectByType<ObstacleController>();
+        obstacleController.ResetSpawnedState();
+        
+        PhaseOverSpawner phaseOverSpawner = FindFirstObjectByType<PhaseOverSpawner>();
+        phaseOverSpawner.StartCounter();
+    }
+
 
     // added: trigger-based collision (2D)
     private void OnTriggerEnter2D(Collider2D other)

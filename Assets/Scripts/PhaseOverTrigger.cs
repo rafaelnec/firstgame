@@ -11,13 +11,14 @@ public class PhaseOverTrigger : MonoBehaviour
         if (!string.IsNullOrEmpty(requiredTag) && !other.CompareTag(requiredTag))
             return;
 
-        PhaseOverSpawner phaseOverSpawner = FindFirstObjectByType<PhaseOverSpawner>();
-        phaseOverSpawner.StartCounter();
+        Destroy(gameObject);
+        
+        // PhaseOverSpawner phaseOverSpawner = FindFirstObjectByType<PhaseOverSpawner>();
+        // phaseOverSpawner.StartCounter();
 
         BackgroundController bg = FindFirstObjectByType<BackgroundController>();
         bg.AdvancePhase();
 
-        Destroy(gameObject);
     }
 
     // Optional: also support non-trigger collisions
@@ -27,12 +28,13 @@ public class PhaseOverTrigger : MonoBehaviour
         if (!string.IsNullOrEmpty(requiredTag) && !collision.collider.CompareTag(requiredTag))
             return;
 
-        PhaseOverSpawner phaseOverSpawner = FindFirstObjectByType<PhaseOverSpawner>();
-        phaseOverSpawner.StartCounter();
+        Destroy(gameObject);
+
+        // PhaseOverSpawner phaseOverSpawner = FindFirstObjectByType<PhaseOverSpawner>();
+        // phaseOverSpawner.StartCounter();
 
         BackgroundController bg = FindFirstObjectByType<BackgroundController>();
         bg.AdvancePhase();
 
-        Destroy(gameObject);
     }
 }

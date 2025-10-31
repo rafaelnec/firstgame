@@ -47,9 +47,10 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Jump", true);
         } else if (Input.GetKeyDown(KeyCode.Space))
         {
+            animator.SetBool("isRunning", true);
             StaticSceneController staticSceneController = FindFirstObjectByType<StaticSceneController>();
             staticSceneController.scrollSpeed = 1f;
-            animator.SetBool("isRunning", true);
+            
         }
     }
 
@@ -65,7 +66,6 @@ public class PlayerController : MonoBehaviour
 
     public void Hit()
     {
-        Debug.Log("Player hit");
         animator.SetTrigger("Fall");
         animator.SetBool("isRunning", false);
 

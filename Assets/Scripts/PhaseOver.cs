@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -31,13 +32,51 @@ public class PhaseOverSpawner : MonoBehaviour
     {
 
         yield return new WaitForSeconds(delaySeconds);
-        Vector3 spawnPos = transform.position + spawnOffset;
-        Instantiate(phaseOverPrefab, spawnPos, Quaternion.identity, parentTransform);
 
+        Camera mainCamera = Camera.main;
+        Vector3 viewportPoint = mainCamera.WorldToViewportPoint(transform.position);
+
+        float screenPositionX = viewportPoint.x + spawnOffset.x;
+        Vector3 spawnPos = new Vector3(screenPositionX, spawnOffset.y, 0);
+        Debug.Log($"Spawning PhaseOver object after delay. {spawnPos}");
+        GameObject phaseOver = Instantiate(phaseOverPrefab, spawnPos, Quaternion.identity, parentTransform);
+        
+        DestroyObjectsBeyond(phaseOver);
+
+    }
+
+    private List<GameObject> FindGameObjectsByTags(List<string> tags)
+    {
+        List<GameObject> allFoundObjects = new List<GameObject>();
+
+        foreach (string tag in tags)
+        {
+            GameObject[] objectsWithCurrentTag = GameObject.FindGameObjectsWithTag(tag);
+            allFoundObjects.AddRange(objectsWithCurrentTag);
+        }
+
+        return allFoundObjects;
+    }
+
+    private void DestroyObjectsBeyond(GameObject obj)
+    {
+        float destroyXPosition = obj.transform.position.x - 1f;
+        List<string> tagsToCheck = new List<string> { "Obstacles", "Collectables" };
+
+        List<GameObject> allGameObjects = FindGameObjectsByTags(tagsToCheck);
+
+        foreach (GameObject objT in allGameObjects)
+        {
+            if (objT.transform.position.x > destroyXPosition)
+            {
+                Destroy(objT);
+            }
+        }
     }
 
     public void StartCounter()
     {
         StartCoroutine(SpawnAfterDelay());
     }
+    
 }

@@ -131,8 +131,9 @@ GameObject:
   - component: {fileID: 304404537}
   - component: {fileID: 304404535}
   - component: {fileID: 304404538}
+  - component: {fileID: 304404539}
   m_Layer: 0
-  m_Name: StaticScene
+  m_Name: DynamicScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,15 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9bd89b03875ba64ba91ad106c3d392a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleController
-  collectiblePrefab: {fileID: 268951673732835898, guid: 74e484a08b566c14e89ad33613af659c, type: 3}
+  collectablePrefab: {fileID: 268951673732835898, guid: 74e484a08b566c14e89ad33613af659c, type: 3}
   parentTransform: {fileID: 304404536}
   minSpawnY: -2.5
   maxSpawnY: 0.5
-  minSpawnX: 0
-  maxSpawnX: 100
-  spawnZ: 0
-  numberOfPrefabsToSpawn: 30
-  minSpawnDistance: 2
 --- !u!4 &304404536
 Transform:
   m_ObjectHideFlags: 0
@@ -200,14 +196,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b3bd9d82c7faae44ad125eb9ed95471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleController
-  obsticlePrefab: {fileID: 1719552727444720193, guid: f47dc3316c3edba49b64eba0efb91272, type: 3}
+  obstaclePrefab: {fileID: 1719552727444720193, guid: f47dc3316c3edba49b64eba0efb91272, type: 3}
   parentTransform: {fileID: 304404536}
-  minSpawnX: 0
-  maxSpawnX: 100
   spawnY: -1.8
-  spawnZ: 0
-  numberOfPrefabsToSpawn: 30
-  minSpawnDistance: 4
+--- !u!114 &304404539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304404534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95e2a640db7ffc4185be7b5763216d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhaseOverSpawner
+  phaseOverPrefab: {fileID: 8461880179182297159, guid: b7f181958e4102c43ba5a2267a47b30b, type: 3}
+  delaySeconds: 2
+  spawnOffset: {x: 17, y: -2.41, z: 0}
+  parentTransform: {fileID: 304404536}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +419,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 4941530758645526566, guid: dcb71080eeeb5cd4e93f398bfac90c98, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -560,7 +567,6 @@ GameObject:
   - component: {fileID: 746234178}
   - component: {fileID: 746234177}
   - component: {fileID: 746234179}
-  - component: {fileID: 746234180}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -612,9 +618,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1916195895
+  m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -8461514266414155272, guid: 386c3aaa65c46b9479123e28bb739e77, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -663,22 +669,6 @@ MonoBehaviour:
   advanceOnCollision: 1
   collisionTag: Player
   resetPositionOnAdvance: 1
---- !u!114 &746234180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746234176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a95e2a640db7ffc4185be7b5763216d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PhaseOverSpawner
-  phaseOverPrefab: {fileID: 8461880179182297159, guid: b7f181958e4102c43ba5a2267a47b30b, type: 3}
-  delaySeconds: 20
-  spawnOffset: {x: 11, y: -2.5, z: 0}
-  parentTransform: {fileID: 746234178}
 --- !u!1 &1844466868
 GameObject:
   m_ObjectHideFlags: 0

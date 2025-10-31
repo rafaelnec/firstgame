@@ -20,7 +20,7 @@ public class ObstaclePrefab : MonoBehaviour
         if (!string.IsNullOrEmpty(requiredTag) && !other.CompareTag(requiredTag))
             return;
 
-        Debug.Log("Obstacle hit something");
+        Explode();
         PlayerController playerController = FindFirstObjectByType<PlayerController>();
         playerController.Hit();
     }
@@ -30,11 +30,16 @@ public class ObstaclePrefab : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(requiredTag) && !collision.collider.CompareTag(requiredTag))
             return;
-
-        Debug.Log("Obstacle hit something2");
+        Explode();
         PlayerController playerController = FindFirstObjectByType<PlayerController>();
         playerController.Hit();
 
+    }
+
+    void Explode() {
+        var exp = GetComponentInChildren<ParticleSystem>();
+        exp.Play();
+        Destroy(gameObject, exp.duration);
     }
 
 }

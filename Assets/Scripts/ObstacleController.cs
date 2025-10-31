@@ -4,93 +4,65 @@ using UnityEngine;
 public class ObstacleController : MonoBehaviour
 {
 
-    [SerializeField] private GameObject obsticlePrefab;
-
+    [SerializeField] private GameObject obstaclePrefab;
     [SerializeField] private Transform parentTransform;
 
-    private bool spawned;
-
-    public float minSpawnX = 0f; // Fixed X position for spawning
-    public float maxSpawnX = 100f; // Fixed X position for spawning
-    public float spawnY = -1.30f; // Minimum Y position for spawning
-    public float spawnZ = 0f; // Fixed Z position for spawning
-    public int numberOfPrefabsToSpawn = 10; // How many prefabs to spawn
-    public float minSpawnDistance = 2f; // Minimum distance between prefabs
-
-    private List<Vector2> spawnedPositions = new List<Vector2>();
+    public float spawnY = -1.30f;
+    private float offsetAmount = 0f;
 
     void Start()
     {
-        if (obsticlePrefab == null)
+        if (obstaclePrefab == null)
         {
             Debug.LogWarning("PhaseOverSpawner: phaseOverPrefab not assigned. Nothing will be spawned.");
             return;
         }
-
-        SpawnRandomPrefabs();
+        ResetSpawnedState();
     }
 
-    void SpawnRandomPrefabs()
+    void Update()
     {
-        
-        for (int i = 0; i < numberOfPrefabsToSpawn; i++)
+        spawnPrefabs(false);
+
+    }
+
+    void spawnPrefabs(bool initialSpawn)
+    {
+
+        float cameraHeight = Camera.main.orthographicSize * 2;
+        float cameraWidth = cameraHeight * Camera.main.aspect;
+
+        if (initialSpawn)
         {
-            Vector2 spawnPosition = Vector2.zero;
-            bool positionFound = false;
-            int maxAttempts = 100; // Prevent infinite loops if no space is found
-
-            for (int attempt = 0; attempt < maxAttempts; attempt++)
-            {
-
-                // Generate a random Y position
-                float randomX = Random.Range(minSpawnX, maxSpawnX);
-                spawnPosition = new Vector2(randomX, spawnY);
-
-                // Instantiate the selected prefab at the random position
-                // Instantiate(obsticlePrefab, spawnPosition, Quaternion.identity, parentTransform);
-            
-
-                // Check if this position is far enough from existing prefabs
-                bool tooClose = false;
-                foreach (Vector2 existingPos in spawnedPositions)
-                {
-                    if (Vector2.Distance(spawnPosition, existingPos) < minSpawnDistance)
-                    {
-                        tooClose = true;
-                        break;
-                    }
-                }
-
-                if (!tooClose)
-                {
-                    positionFound = true;
-                    spawnedPositions.Add(spawnPosition);
-                    break; // Exit attempt loop, position found
-                }
+            float currentOffsetX = 1f;
+            float cameraOffsetX = Camera.main.transform.position.x + (cameraWidth / 2);
+            while (currentOffsetX < cameraOffsetX) {
+                Vector2 spawnPosition = new Vector2(currentOffsetX, spawnY);
+                Instantiate(obstaclePrefab, spawnPosition, Quaternion.identity, parentTransform);
+                currentOffsetX += Random.Range(3f, 7f);
             }
 
-            if (positionFound)
-            {
-                // Randomly select a prefab from the array
-                // GameObject prefabToInstantiate = prefabsToSpawn[Random.Range(0, prefabsToSpawn.Length)];
-                Instantiate(obsticlePrefab, spawnPosition, Quaternion.identity, parentTransform);
+        } else {
+
+            if (offsetAmount < Camera.main.transform.position.x + (cameraWidth / 2))
+            {                  
+                Vector2 spawnPosition = new Vector2(
+                    Camera.main.transform.position.x + (cameraWidth / 2) + offsetAmount, 
+                    spawnY);
+
+                Instantiate(obstaclePrefab, spawnPosition, Quaternion.identity, parentTransform);
+                offsetAmount += Random.Range(3f, 7f);
             }
             
         }
+        
+    }
 
-        // for (int i = 0; i < numberOfPrefabsToSpawn; i++)
-        // {
 
-        //     // Generate a random Y position
-        //     float randomX = Random.Range(minSpawnX, maxSpawnX);
-
-        //     // Create the spawn position Vector3
-        //     Vector3 spawnPosition = new Vector3(randomX, spawnY, spawnZ);
-
-        //     // Instantiate the selected prefab at the random position
-        //     Instantiate(obsticlePrefab, spawnPosition, Quaternion.identity, parentTransform);
-            
-        // }
+    public void ResetSpawnedState()
+    {
+        offsetAmount = Random.Range(4f, 10f);
+        spawnPrefabs(true);
     }
 
 }
