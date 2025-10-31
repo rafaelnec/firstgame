@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
@@ -5,14 +6,28 @@ public class BackgroundController : MonoBehaviour
     public float screenPosition = -0.355f;
 
     [SerializeField] private float scrollSpeed = 1f;
+
+    // changed: use int for phase index
+    [SerializeField] private int currentPhase = 0;
+
     private Vector3 startPosition;
-    private float backgroundLength;
     private SpriteRenderer spriteRenderer;
     private Camera mainCamera;
+
+    [SerializeField] private List<Sprite> backgroundSprites = new List<Sprite>();
+
+    // added: collision advance options
+    [Header("Advance On Hit")]
+    [SerializeField] private bool advanceOnCollision = true;      // enable/disable advancing when hit
+    [SerializeField] private string collisionTag = "Player";      // only advance when collider has this tag (empty = any)
+    [SerializeField] private bool resetPositionOnAdvance = true;  // reset background to startPosition when advancing
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        if (backgroundSprites != null && backgroundSprites.Count > 0)
+            spriteRenderer.sprite = backgroundSprites[currentPhase];
+
         mainCamera = Camera.main;
 
         if (spriteRenderer == null)
@@ -20,11 +35,10 @@ public class BackgroundController : MonoBehaviour
             Debug.LogError("SpriteRenderer not found!");
             return;
         }
+        
 
         // Store initial position and calculate background length
         startPosition = transform.position;
-        backgroundLength = spriteRenderer.bounds.size.x;
-        Debug.Log($"Background length: {backgroundLength}");
     }
 
     void Update()
@@ -34,17 +48,56 @@ public class BackgroundController : MonoBehaviour
 
         // Convert the sprite's position to viewport coordinates
         Vector3 viewportPoint = mainCamera.WorldToViewportPoint(transform.position);
-
-        // Check if the sprite is completely off screen to the left
-        if (viewportPoint.x < screenPosition) 
+        if (viewportPoint.x < screenPosition)
         {
-            // Reset to starting position
+            // reset position (or reposition) and advance the phase
             transform.position = startPosition;
-            Debug.Log("Sprite reset - moved off screen");
+        }
+    }
+
+    // added: advance phase, wrap and update sprite
+    public void AdvancePhase()
+    {
+
+        if (backgroundSprites == null || backgroundSprites.Count == 0) return;
+
+        currentPhase++;
+        spriteRenderer.sortingOrder = -1;
+
+        if (currentPhase >= backgroundSprites.Count)
+        {
+            currentPhase = 0;
+            spriteRenderer.sortingOrder = 0;
         }
 
-        // Debug information
-        Debug.Log($"Viewport position X: {viewportPoint.x:F2}");
-        Debug.Log($"World position X: {transform.position.x:F2}");
+        if (spriteRenderer != null)
+            spriteRenderer.sprite = backgroundSprites[currentPhase];
+
+        if (resetPositionOnAdvance)
+            transform.position = startPosition;
+
+        Debug.Log($"Background advanced to phase {currentPhase}");
+    }
+
+    // added: trigger-based collision (2D)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!advanceOnCollision) return;
+        if (!string.IsNullOrEmpty(collisionTag))
+        {
+            if (!other.CompareTag(collisionTag)) return;
+        }
+        AdvancePhase();
+    }
+
+    // added: collision-based (2D)
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!advanceOnCollision) return;
+        if (!string.IsNullOrEmpty(collisionTag))
+        {
+            if (!collision.collider.CompareTag(collisionTag)) return;
+        }
+        AdvancePhase();
     }
 }

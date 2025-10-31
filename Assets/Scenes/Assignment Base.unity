@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 611889962}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -566,28 +566,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BackgroundController
   screenPosition: -0.35
   scrollSpeed: 1
---- !u!95 &746234180
-Animator:
-  serializedVersion: 7
+  currentPhase: 0
+  backgroundSprites:
+  - {fileID: -8461514266414155272, guid: 386c3aaa65c46b9479123e28bb739e77, type: 3}
+  - {fileID: 656988019031298925, guid: 386c3aaa65c46b9479123e28bb739e77, type: 3}
+  - {fileID: -7810250789829366425, guid: 386c3aaa65c46b9479123e28bb739e77, type: 3}
+  advanceOnCollision: 1
+  collisionTag: Player
+  resetPositionOnAdvance: 1
+--- !u!114 &746234180
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746234176}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 34f2e14e173285a4d8c6b59bda038430, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95e2a640db7ffc4185be7b5763216d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhaseOverSpawner
+  phaseOverPrefab: {fileID: 8461880179182297159, guid: b7f181958e4102c43ba5a2267a47b30b, type: 3}
+  delaySeconds: 2
+  spawnOffset: {x: 12, y: -2.5, z: 0}
+  parentTransform: {fileID: 746234178}
 --- !u!1 &849688043
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,7 +606,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &849688044
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -898,7 +900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8595312392213381204, guid: f38bd3e167271e24f9546ef624418401, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
