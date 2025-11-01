@@ -40,7 +40,8 @@ public class CollectableController : MonoBehaviour
         {
             float currentOffsetX = 1f;
             float cameraOffsetX = Camera.main.transform.position.x + (cameraWidth / 2);
-            while (currentOffsetX < cameraOffsetX) {
+            while (currentOffsetX < cameraOffsetX)
+            {
                 float randomY = Random.Range(minSpawnY, maxSpawnY);
                 Vector2 spawnPosition = new Vector2(currentOffsetX, randomY);
                 Instantiate(collectablePrefab, spawnPosition, Quaternion.identity, parentTransform);
@@ -49,15 +50,17 @@ public class CollectableController : MonoBehaviour
 
         } else {
 
-            if (offsetAmount < Camera.main.transform.position.x + (cameraWidth / 2))
-            {                  
+            GameObject phaseOver = GameObject.FindWithTag("PhaseOver");
+            
+            if (offsetAmount > parentTransform.position.x - (cameraWidth / 2) && (phaseOver == null || offsetAmount > phaseOver.transform.position.x ))
+            {                 
                 float randomY = Random.Range(minSpawnY, maxSpawnY);
                 Vector2 spawnPosition = new Vector2(
-                    Camera.main.transform.position.x + (cameraWidth / 2) + offsetAmount, 
+                    parentTransform.position.x + (cameraWidth / 2) - offsetAmount, 
                     randomY);
 
                 Instantiate(collectablePrefab, spawnPosition, Quaternion.identity, parentTransform);
-                offsetAmount += Random.Range(1f, 4f);
+                offsetAmount -= Random.Range(1f, 4f);
             }
             
         }
@@ -66,7 +69,7 @@ public class CollectableController : MonoBehaviour
 
     public void ResetSpawnedState()
     {
-        offsetAmount = Random.Range(1f, 2f);
+        offsetAmount = parentTransform.position.x - Random.Range(1f, 2f);
         spawnPrefabs(true);
     }
 

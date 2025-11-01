@@ -44,14 +44,16 @@ public class ObstacleController : MonoBehaviour
 
         } else {
 
-            if (offsetAmount < Camera.main.transform.position.x + (cameraWidth / 2))
+            GameObject phaseOver = GameObject.FindWithTag("PhaseOver");
+
+            if (offsetAmount > parentTransform.position.x - (cameraWidth / 2) && (phaseOver == null || offsetAmount > phaseOver.transform.position.x ))
             {                  
                 Vector2 spawnPosition = new Vector2(
-                    Camera.main.transform.position.x + (cameraWidth / 2) + offsetAmount, 
+                    parentTransform.position.x + (cameraWidth / 2) - offsetAmount, 
                     spawnY);
 
                 Instantiate(obstaclePrefab, spawnPosition, Quaternion.identity, parentTransform);
-                offsetAmount += Random.Range(3f, 7f);
+                offsetAmount -= Random.Range(3f, 7f);
             }
             
         }
@@ -61,7 +63,7 @@ public class ObstacleController : MonoBehaviour
 
     public void ResetSpawnedState()
     {
-        offsetAmount = Random.Range(4f, 10f);
+        offsetAmount = parentTransform.position.x - Random.Range(1f, 2f);
         spawnPrefabs(true);
     }
 

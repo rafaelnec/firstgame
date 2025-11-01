@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
     public float jumpLength = 10f;
     private bool isGrounded;
 
+    float jumpTime;
+    bool jumping;
+    public float buttonTime = 0.3f;
+
     void Start()
     {
         // Get components
@@ -45,12 +49,13 @@ public class PlayerController : MonoBehaviour
             // rb.linearVelocity = new Vector2(rb.linearVelocity.x * jumpLength, 0);
             isGrounded = false;
             animator.SetBool("Jump", true);
-        } else if (Input.GetKeyDown(KeyCode.Space))
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
         {
             animator.SetBool("isRunning", true);
             StaticSceneController staticSceneController = FindFirstObjectByType<StaticSceneController>();
             staticSceneController.scrollSpeed = 1f;
-            
+
         }
     }
 
