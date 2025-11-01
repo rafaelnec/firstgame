@@ -13,9 +13,6 @@ public class PhaseOverTrigger : MonoBehaviour
 
         Destroy(gameObject);
         
-        // PhaseOverSpawner phaseOverSpawner = FindFirstObjectByType<PhaseOverSpawner>();
-        // phaseOverSpawner.StartCounter();
-
         BackgroundController bg = FindFirstObjectByType<BackgroundController>();
         bg.AdvancePhase();
 
@@ -29,9 +26,6 @@ public class PhaseOverTrigger : MonoBehaviour
             return;
 
         Destroy(gameObject);
-
-        // PhaseOverSpawner phaseOverSpawner = FindFirstObjectByType<PhaseOverSpawner>();
-        // phaseOverSpawner.StartCounter();
 
         BackgroundController bg = FindFirstObjectByType<BackgroundController>();
         bg.AdvancePhase();
