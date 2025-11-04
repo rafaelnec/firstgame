@@ -15,26 +15,26 @@ public class ObstaclePrefab : MonoBehaviour
     }
 
     
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (!string.IsNullOrEmpty(requiredTag) && !other.CompareTag(requiredTag))
-            return;
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (!string.IsNullOrEmpty(requiredTag) && !other.CompareTag(requiredTag))
+    //         return;
 
-        Explode();
-        PlayerController playerController = FindFirstObjectByType<PlayerController>();
-        playerController.Hit();
-    }
+    //     Explode();
+    //     PlayerController playerController = FindFirstObjectByType<PlayerController>();
+    //     playerController.Hit();
+    // }
 
-    // Optional: also support non-trigger collisions
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (!string.IsNullOrEmpty(requiredTag) && !collision.collider.CompareTag(requiredTag))
-            return;
-        Explode();
-        PlayerController playerController = FindFirstObjectByType<PlayerController>();
-        playerController.Hit();
+    // // Optional: also support non-trigger collisions
+    // private void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     if (!string.IsNullOrEmpty(requiredTag) && !collision.collider.CompareTag(requiredTag))
+    //         return;
+    //     Explode();
+    //     PlayerController playerController = FindFirstObjectByType<PlayerController>();
+    //     playerController.Hit();
 
-    }
+    // }
 
     void Explode() {
         var exp = GetComponentInChildren<ParticleSystem>();

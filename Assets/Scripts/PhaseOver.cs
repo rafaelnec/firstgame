@@ -5,78 +5,27 @@ using UnityEngine.Rendering;
 
 public class PhaseOverSpawner : MonoBehaviour
 {
-    [Tooltip("Assign the PhaseOver prefab here")]
-    [SerializeField] private GameObject phaseOverPrefab;
+    [SerializeField] private string requiredTag = "Player";
+    private GameManager gameManager;
 
-    [Tooltip("Delay in seconds before spawning (default = 60)")]
-    [SerializeField] private float delaySeconds = 2f;
-
-    [Tooltip("Position offset relative to this GameObject where the prefab will be spawned")]
-    [SerializeField] private Vector3 spawnOffset = Vector3.zero;
-
-    [Tooltip("Optional parent for the spawned instance")]
-    [SerializeField] private Transform parentTransform;
-
-    void Start()
+    private void OnColission(Collider2D other)
     {
-        if (phaseOverPrefab == null)
-        {
-            Debug.LogWarning("PhaseOverSpawner: phaseOverPrefab not assigned. Nothing will be spawned.");
+        if (!string.IsNullOrEmpty(requiredTag) && !other.CompareTag(requiredTag))
             return;
-        }
 
-        StartCounter();
+        GameManager gameManager = FindFirstObjectByType<GameManager>();
+        gameManager.AdvancePhase();
     }
 
-    private IEnumerator SpawnAfterDelay()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-
-        yield return new WaitForSeconds(delaySeconds);
-
-        Camera mainCamera = Camera.main;
-        Vector3 viewportPoint = mainCamera.WorldToViewportPoint(transform.position);
-
-        float screenPositionX = viewportPoint.x + spawnOffset.x;
-        Vector3 spawnPos = new Vector3(screenPositionX, spawnOffset.y, 0);
-        Debug.Log($"Spawning PhaseOver object after delay. {spawnPos}");
-        GameObject phaseOver = Instantiate(phaseOverPrefab, spawnPos, Quaternion.identity, parentTransform);
-        
-        DestroyObjectsBeyond(phaseOver);
-
+        OnColission(other);
     }
 
-    private List<GameObject> FindGameObjectsByTags(List<string> tags)
+    // Optional: also support non-trigger collisions
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        List<GameObject> allFoundObjects = new List<GameObject>();
-
-        foreach (string tag in tags)
-        {
-            GameObject[] objectsWithCurrentTag = GameObject.FindGameObjectsWithTag(tag);
-            allFoundObjects.AddRange(objectsWithCurrentTag);
-        }
-
-        return allFoundObjects;
+        OnColission(collision.collider);
     }
 
-    private void DestroyObjectsBeyond(GameObject obj)
-    {
-        float destroyXPosition = obj.transform.position.x - 1f;
-        List<string> tagsToCheck = new List<string> { "Obstacles", "Collectables" };
-
-        List<GameObject> allGameObjects = FindGameObjectsByTags(tagsToCheck);
-
-        foreach (GameObject objT in allGameObjects)
-        {
-            if (objT.transform.position.x > destroyXPosition)
-            {
-                Destroy(objT);
-            }
-        }
-    }
-
-    public void StartCounter()
-    {
-        StartCoroutine(SpawnAfterDelay());
-    }
-    
 }

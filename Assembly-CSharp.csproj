@@ -60,6 +60,9 @@
     <Compile Include="Assets\Scripts\StaticSceneController.cs" />
     <Compile Include="Assets\Scripts\ObstaclePrefab.cs" />
     <Compile Include="Assets\Scripts\ObstacleController.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\GroundController.cs" />
   </ItemGroup>
   <ItemGroup>
