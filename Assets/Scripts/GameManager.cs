@@ -12,15 +12,15 @@ public class GameManager : MonoBehaviour
     public void AdvancePhase()
     {
 
-        Debug.Log("Advancing background phase.");
+        // Debug.Log("Advancing background phase.");
         background = FindFirstObjectByType<BackgroundController>();
         background.AdvancePhase();
 
-        Debug.Log("Reload Background.");
+        // Debug.Log("Reload Background.");
         cameraController = FindFirstObjectByType<CameraController>();
         cameraController.Reload();
 
-        Debug.Log("Reload Player.");
+        // Debug.Log("Reload Player.");
         playerController = FindFirstObjectByType<PlayerController>();
         playerController.Reload();   
         

@@ -422,6 +422,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cbdc07229de8e247a25dfffcaa0d1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  jumpForce: 7
+  jumpLength: 0.5
   moveSpeed: 5
   maxXPosition: 31.5
 --- !u!50 &611889964
@@ -435,8 +437,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 0.8749763
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -713,7 +715,6 @@ GameObject:
   - component: {fileID: 1844466871}
   - component: {fileID: 1844466870}
   - component: {fileID: 1844466872}
-  - component: {fileID: 1844466873}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Ground
@@ -767,7 +768,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: -2654448873629939119, guid: 6acc3cc9a4173b644bb11df9d60a0818, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -840,20 +841,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 64, y: 0.94781685}
   m_EdgeRadius: 0
---- !u!114 &1844466873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1844466868}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 918597826cdaf5d4f99754e58adca78d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundController
-  screenPosition: -0.35
-  scrollSpeed: 0
 --- !u!1 &2135316459
 GameObject:
   m_ObjectHideFlags: 0
