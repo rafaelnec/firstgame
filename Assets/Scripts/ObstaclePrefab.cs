@@ -36,6 +36,7 @@ public class ObstaclePrefab : MonoBehaviour
         var exp = GetComponentInChildren<ParticleSystem>();
         exp.Play();
         Destroy(gameObject, exp.main.duration);
+        
         gameManager = FindFirstObjectByType<GameManager>();
         gameManager.PlayerHit();
     }
