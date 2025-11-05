@@ -310,7 +310,7 @@ Transform:
   m_GameObject: {fileID: 608513459}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.6, y: -2.39, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -422,10 +422,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cbdc07229de8e247a25dfffcaa0d1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  jumpForce: 7
-  jumpLength: 0.5
+  jumpForce: 5.5
+  jumpLength: -2.5
   moveSpeed: 5
   maxXPosition: 31.5
+  groundTag: Ground
 --- !u!50 &611889964
 Rigidbody2D:
   serializedVersion: 5
@@ -606,7 +607,7 @@ Transform:
   m_GameObject: {fileID: 746234176}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.6, y: 2.35, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -629,6 +630,58 @@ MonoBehaviour:
   - {fileID: -8461514266414155272, guid: 386c3aaa65c46b9479123e28bb739e77, type: 3}
   - {fileID: 656988019031298925, guid: 386c3aaa65c46b9479123e28bb739e77, type: 3}
   - {fileID: -7810250789829366425, guid: 386c3aaa65c46b9479123e28bb739e77, type: 3}
+--- !u!1 &798864808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 798864810}
+  - component: {fileID: 798864809}
+  m_Layer: 0
+  m_Name: CollectableManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &798864809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798864808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c8f9337c7db6fb49860a773eacb1e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollectableManager
+  collectablePrefab: {fileID: 268951673732835898, guid: 74e484a08b566c14e89ad33613af659c, type: 3}
+  parentTransform: {fileID: 2135316460}
+  minSpawnY: -2.43
+  maxSpawnY: 0.6
+  minOffsetX: -27
+  maxOffsetX: 30
+  minPaddingX: 1
+  maxPaddingX: 4
+--- !u!4 &798864810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798864808}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1475566510 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2055378318192678396, guid: b7f181958e4102c43ba5a2267a47b30b, type: 3}
@@ -644,11 +697,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2055378318192678396, guid: b7f181958e4102c43ba5a2267a47b30b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 60.39
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 2055378318192678396, guid: b7f181958e4102c43ba5a2267a47b30b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.029999971
+      value: -2.4
       objectReference: {fileID: 0}
     - target: {fileID: 2055378318192678396, guid: b7f181958e4102c43ba5a2267a47b30b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -789,7 +842,7 @@ Transform:
   m_GameObject: {fileID: 1844466868}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.6, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: -2.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -841,6 +894,57 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 64, y: 0.94781685}
   m_EdgeRadius: 0
+--- !u!1 &1990572025
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1990572027}
+  - component: {fileID: 1990572026}
+  m_Layer: 0
+  m_Name: ObstacleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1990572026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990572025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac96f35159f4dcf439d0b417a022ccdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObstableManager
+  obstaclePrefab: {fileID: 1719552727444720193, guid: f47dc3316c3edba49b64eba0efb91272, type: 3}
+  parentTransform: {fileID: 2135316460}
+  spawnY: -1.8
+  minOffsetX: -27
+  maxOffsetX: 30
+  minPaddingX: 3
+  maxPaddingX: 7
+--- !u!4 &1990572027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990572025}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30, y: -0.59, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2135316459
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,7 +970,7 @@ Transform:
   m_GameObject: {fileID: 2135316459}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.6, y: -2.39, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -880,6 +984,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 608513461}
+  - {fileID: 798864810}
+  - {fileID: 1990572027}
   - {fileID: 519420032}
   - {fileID: 611889961}
   - {fileID: 2135316460}

@@ -8,69 +8,26 @@ public class CollectableController : MonoBehaviour
 
     [SerializeField] private Transform parentTransform;
 
-    private bool spawned;
+    public float minSpawnY = 0f; // Minimum Y position for spawning
+    public float maxSpawnY = -2.43f; // Maximum Y position for spawning
+    public float minOffsetX = -27f;
+    public float maxOffsetX = 30f;
+    public float minpaddingX = 1f;
+    public float maxpaddingX = 4f;
 
-    public float minSpawnY = -5f; // Minimum Y position for spawning
-    public float maxSpawnY = 5f; // Maximum Y position for spawning
-    private float offsetAmount = 0f;
 
-    void Start()
+    public void SpawnObjects()
     {
-        if (collectablePrefab == null)
+
+        float currentOffsetX = minOffsetX;
+        while (currentOffsetX < maxOffsetX)
         {
-            Debug.LogWarning("PhaseOverSpawner: phaseOverPrefab not assigned. Nothing will be spawned.");
-            return;
-        }
-
-        ResetSpawnedState();
-    }
-
-    void Update()
-    {
-        spawnPrefabs(false);
-    }
-
-    void spawnPrefabs(bool initialSpawn)
-    {
-
-        float cameraHeight = Camera.main.orthographicSize * 2;
-        float cameraWidth = cameraHeight * Camera.main.aspect;
-
-        if (initialSpawn)
-        {
-            float currentOffsetX = 1f;
-            float cameraOffsetX = Camera.main.transform.position.x + (cameraWidth / 2);
-            while (currentOffsetX < cameraOffsetX)
-            {
-                float randomY = Random.Range(minSpawnY, maxSpawnY);
-                Vector2 spawnPosition = new Vector2(currentOffsetX, randomY);
-                Instantiate(collectablePrefab, spawnPosition, Quaternion.identity, parentTransform);
-                currentOffsetX += Random.Range(1f, 4f);
-            }
-
-        } else {
-
-            GameObject phaseOver = GameObject.FindWithTag("PhaseOver");
-            
-            if (offsetAmount > parentTransform.position.x - (cameraWidth / 2) && (phaseOver == null || offsetAmount > phaseOver.transform.position.x ))
-            {                 
-                float randomY = Random.Range(minSpawnY, maxSpawnY);
-                Vector2 spawnPosition = new Vector2(
-                    parentTransform.position.x + (cameraWidth / 2) - offsetAmount, 
-                    randomY);
-
-                Instantiate(collectablePrefab, spawnPosition, Quaternion.identity, parentTransform);
-                offsetAmount -= Random.Range(1f, 4f);
-            }
-            
-        }
+            float randomY = Random.Range(minSpawnY, maxSpawnY);
+            Vector2 spawnPosition = new Vector2(currentOffsetX, randomY);
+            Instantiate(collectablePrefab, spawnPosition, Quaternion.identity, parentTransform);
+            currentOffsetX += Random.Range(minpaddingX, maxpaddingX);
+        }      
         
-    }
-
-    public void ResetSpawnedState()
-    {
-        offsetAmount = parentTransform.position.x - Random.Range(1f, 2f);
-        spawnPrefabs(true);
     }
 
 }
