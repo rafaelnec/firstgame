@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     private PlayerController playerController;
     private CollectableManager collectableManager;
     private ObstacleManager obstacleManager;
+    private LifeManager lifeManager;
 
     private int points = 0;
     private int life = 3;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
         background = FindFirstObjectByType<BackgroundController>();
         collectableManager = FindFirstObjectByType<CollectableManager>();
         obstacleManager = FindFirstObjectByType<ObstacleManager>();
+        lifeManager = FindFirstObjectByType<LifeManager>();
 
         AddDynamicObjects();
     }
@@ -35,12 +37,17 @@ public class GameManager : MonoBehaviour
 
         collectableManager.SpawnObjects();
         obstacleManager.SpawnObjects();
+
+        lifeManager.quantity = 2;
+        lifeManager.SpawnObjects();
     }
 
     private void ClearDynamicObjects()
     {
         collectableManager.ClearObjects();
         obstacleManager.ClearObjects();
+        lifeManager.ClearObjects();
+        
     }
 
     public void AdvancePhase()
@@ -63,11 +70,17 @@ public class GameManager : MonoBehaviour
             lifeText.text = life.ToString("D3");    
         }
     }
-    
+
     public void AddPoint()
     {
         points += 10;
-        pointsText.text = points.ToString("D3");
+        pointsText.text = points.ToString("D5");
+    }
+    
+    public void AddLife()
+    {
+        life += 1;
+        lifeText.text = life.ToString("D3");
     }
 
 }

@@ -7,8 +7,8 @@ public class CollectableManager : MonoBehaviour
 
     [SerializeField] private Transform parentTransform;
 
-    public float minSpawnY = -1.8f; // Minimum Y position for spawning
-    public float maxSpawnY = 5f; // Maximum Y position for spawning
+    public float minSpawnY = -2.43f; // Minimum Y position for spawning
+    public float maxSpawnY = 0.6f; // Maximum Y position for spawning
     public float minOffsetX = -27F;
     public float maxOffsetX = 30f;
     public float minPaddingX = 1f;

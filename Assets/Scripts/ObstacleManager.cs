@@ -8,7 +8,7 @@ public class ObstacleManager : MonoBehaviour
 
     public float spawnY = 0f; // Minimum Y position for spawning
 
-   public float minOffsetX = -27F;
+   public float minOffsetX = -25f;
     public float maxOffsetX = 30f;
     public float minPaddingX = 3f;
     public float maxPaddingX = 7f;

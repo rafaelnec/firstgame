@@ -51,6 +51,8 @@
     <Compile Include="Assets\Scripts\CollectableManager.cs" />
     <Compile Include="Assets\Scripts\BackgroundController.cs" />
     <Compile Include="Assets\Scripts\Utility\DestroyOffScreen.cs" />
+    <Compile Include="Assets\Scripts\LifePrefab.cs" />
+    <Compile Include="Assets\Scripts\LifeManager.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Utility\DestroyOnTriggerExit.cs" />
     <Compile Include="Assets\Scripts\CollectablePrefab.cs" />

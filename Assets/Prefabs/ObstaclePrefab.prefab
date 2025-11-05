@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7050689025912758369}
   - component: {fileID: 3108796314484196631}
   - component: {fileID: 6279318642593261397}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ObstaclePrefab
   m_TagString: Obstacles
   m_Icon: {fileID: 0}
@@ -214,9 +214,17 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2584144885705572294, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2584144885890085385, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
       propertyPath: m_Name
       value: Explosion_2_Bomb_Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 2584144885890085385, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2584144885890085388, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
       propertyPath: looping
@@ -286,17 +294,37 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2584144885925081453, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2584144886240687677, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2584144886240687678, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2584144886361850763, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2584144886361850772, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2584144886557936391, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2584144886557936442, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2584144886843878600, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2584144886843878607, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
       propertyPath: playOnAwake
@@ -306,9 +334,17 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2584144886999040158, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2584144887692016981, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2584144887692016982, guid: 0cce6157f975eee4dbb229fa00f63747, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

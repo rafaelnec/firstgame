@@ -8,11 +8,13 @@ public class CollectablePrefab : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         OnColission(other);
+        OnDynamicObjectColission(other);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         OnColission(collision.collider);
+        OnDynamicObjectColission(collision.collider);
     }
 
     private void OnColission(Collider2D other)
@@ -21,8 +23,14 @@ public class CollectablePrefab : MonoBehaviour
             return;
 
         Destroy(gameObject);
-        
+
         gameManager = FindFirstObjectByType<GameManager>();
         gameManager.AddPoint();
+    }
+    
+    void OnDynamicObjectColission(Collider2D other)
+    {
+       if (!string.IsNullOrEmpty(requiredTag) && !other.CompareTag(requiredTag))
+            Destroy(gameObject);
     }
 }

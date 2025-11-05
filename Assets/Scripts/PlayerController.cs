@@ -21,16 +21,12 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
 
         startPlayerPosition = transform.position;
-        animator.SetBool("isRunning", true);
+        animator.SetBool("isRunning", false);
     }
 
     void Update()
     {
-
-        if (transform.position.x < maxXPosition && animator.GetBool("isRunning"))
-        {
-            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
-        }
+       
         if (Input.GetKeyDown(KeyCode.Space) && animator.GetBool("isGrounded"))
         {
 
@@ -48,10 +44,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        if (transform.position.x < maxXPosition && animator.GetBool("isRunning"))
+        {
+            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        }
+    }
+
     public void Reload()
     {
+        animator.SetTrigger("Reload");
+        animator.SetBool("isGrounded", true);
+        animator.SetBool("isRunning", false);
+        rb.AddForceX(-jumpLength, ForceMode2D.Impulse);
         transform.position = startPlayerPosition;
-        animator.SetBool("isRunning", true);
     }
 
     void OnCollisionEnter2D(Collision2D collision)

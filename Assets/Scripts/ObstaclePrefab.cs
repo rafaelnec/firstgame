@@ -19,26 +19,35 @@ public class ObstaclePrefab : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        OnColission(other);
+        OnPlayerColission(other);
+        OnDynamicObjectColission(other);
     }
 
     // Optional: also support non-trigger collisions
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        OnColission(collision.collider);
+        OnPlayerColission(collision.collider);
+        OnDynamicObjectColission(collision.collider);
     }
 
-    void OnColission(Collider2D other) {
+    void OnPlayerColission(Collider2D other)
+    {
 
         if (!string.IsNullOrEmpty(requiredTag) && !other.CompareTag(requiredTag))
             return;
-            
+
         var exp = GetComponentInChildren<ParticleSystem>();
         exp.Play();
         Destroy(gameObject, exp.main.duration);
-        
+
         gameManager = FindFirstObjectByType<GameManager>();
         gameManager.PlayerHit();
+    }
+    
+    void OnDynamicObjectColission(Collider2D other)
+    {
+        if (!string.IsNullOrEmpty(requiredTag) && !other.CompareTag(requiredTag))
+            Destroy(gameObject);
     }
 
 }

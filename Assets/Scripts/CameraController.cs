@@ -29,5 +29,4 @@ public class CameraController: MonoBehaviour
     {
         cameraTransform.position = new Vector3(0, 0, cameraTransform.position.z);
     }
-    
 }
