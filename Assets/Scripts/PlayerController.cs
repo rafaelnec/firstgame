@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -68,9 +67,6 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.zero);
         animator.SetTrigger("Fall");
         animator.SetBool("isRunning", false);
-
-        // StaticSceneController staticSceneController = FindFirstObjectByType<StaticSceneController>();
-        // staticSceneController.scrollSpeed = 0f;
 
     }
 

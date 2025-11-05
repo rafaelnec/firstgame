@@ -16,9 +16,7 @@ public class CameraController: MonoBehaviour
     {
         if (playerTransform != null)
         {
-            // Calculate the desired camera position
             Vector3 desiredPosition = new Vector3(playerTransform.position.x + offset.x, cameraTransform.position.y, cameraTransform.position.z);
-
             if (desiredPosition.x < maxXPosition)
             {
                 transform.position = desiredPosition;

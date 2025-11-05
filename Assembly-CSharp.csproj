@@ -51,21 +51,15 @@
     <Compile Include="Assets\Scripts\CollectableManager.cs" />
     <Compile Include="Assets\Scripts\BackgroundController.cs" />
     <Compile Include="Assets\Scripts\Utility\DestroyOffScreen.cs" />
-    <Compile Include="Assets\Scripts\CollectableController.cs" />
-    <Compile Include="Assets\Scripts\CollectableTrigger.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Utility\DestroyOnTriggerExit.cs" />
+    <Compile Include="Assets\Scripts\CollectablePrefab.cs" />
     <Compile Include="Assets\Scripts\ObstacleManager.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
-    <Compile Include="Assets\Scripts\PhaseOverTrigger.cs" />
-    <Compile Include="Assets\Scripts\PhaseOver.cs" />
-    <Compile Include="Assets\Scripts\StaticSceneController.cs" />
     <Compile Include="Assets\Scripts\ObstaclePrefab.cs" />
-    <Compile Include="Assets\Scripts\ObstacleController.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\PhaseOverPrefab.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Scripts\GroundController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ProjectSettings\ProjectVersion.txt" />

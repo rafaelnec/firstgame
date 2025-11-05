@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public class PhaseOverSpawner : MonoBehaviour
+public class PhaseOverPrefab : MonoBehaviour
 {
     [SerializeField] private string requiredTag = "Player";
     private GameManager gameManager;
@@ -22,7 +19,6 @@ public class PhaseOverSpawner : MonoBehaviour
         OnColission(other);
     }
 
-    // Optional: also support non-trigger collisions
     private void OnCollisionEnter2D(Collision2D collision)
     {
         OnColission(collision.collider);

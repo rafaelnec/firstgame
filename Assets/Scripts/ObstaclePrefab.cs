@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class ObstaclePrefab : MonoBehaviour
 {
@@ -36,7 +35,7 @@ public class ObstaclePrefab : MonoBehaviour
             
         var exp = GetComponentInChildren<ParticleSystem>();
         exp.Play();
-        Destroy(gameObject, exp.duration);
+        Destroy(gameObject, exp.main.duration);
         gameManager = FindFirstObjectByType<GameManager>();
         gameManager.PlayerHit();
     }
