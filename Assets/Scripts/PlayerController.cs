@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
 
     public void Hit()
     {
+        rb.AddForceX(-jumpLength, ForceMode2D.Impulse);
         transform.Translate(Vector3.zero);
         animator.SetTrigger("Fall");
         animator.SetBool("isRunning", false);
