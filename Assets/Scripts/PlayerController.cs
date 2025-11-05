@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody2D rb;
     private Animator animator;
-    
 
     void Start()
     {
@@ -66,7 +65,8 @@ public class PlayerController : MonoBehaviour
         if (!string.IsNullOrEmpty(groundTag) && !collision.collider.CompareTag(groundTag))
             return;
 
-        animator.SetBool("isGrounded", true);
+        if (this.enabled)
+            animator.SetBool("isGrounded", true);
     }
 
     public void Hit()

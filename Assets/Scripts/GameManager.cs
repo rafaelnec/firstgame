@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI pointsText;
     public TextMeshProUGUI lifeText;
+    public GameObject gameOver;
 
     private BackgroundController background;
     private CameraController cameraController;
@@ -64,10 +65,13 @@ public class GameManager : MonoBehaviour
     public void PlayerHit()
     {
         playerController.Hit();
-        if (life > 0)
+        if (life > 1)
         {
             life -= 1;
             lifeText.text = life.ToString("D3");    
+        } else
+        {
+            gameOver.SetActive(true);
         }
     }
 
