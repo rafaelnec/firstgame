@@ -1,14 +1,26 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameOverController : MonoBehaviour
 {
 
-    public GameObject player;
+    private GameManager gameManager;
+    public GameObject backToMenu;
 
-    void Awake()
+    void Start()
     {
-        player.GetComponent<PlayerController>().enabled = false;
+        gameManager = FindFirstObjectByType<GameManager>();
+        gameManager.SetGameState(GameManager.GameState.GameOver);
     }
 
+    void OnEnable()
+    {
+        EventSystem.current.SetSelectedGameObject(backToMenu);
+    }
+
+    public void BackToMenuOnBtnClick()
+    {
+        gameManager.SetGameState(GameManager.GameState.MainMenu);
+    }
 
 }

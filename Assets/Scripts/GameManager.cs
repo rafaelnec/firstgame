@@ -1,13 +1,23 @@
-using System.Data;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI pointsText;
     public TextMeshProUGUI lifeText;
-    public GameObject gameOver;
+    public TextMeshProUGUI gameOverText;
+    public GameObject gameOverObject;
+    public GameObject playerObject;
+    public GameObject gameBarObject;
+    public GameObject menuObject;
+
+    public enum GameState
+    {
+        MainMenu,
+        Playing,
+        Paused,
+        GameOver
+    }
 
     private BackgroundController background;
     private CameraController cameraController;
@@ -18,8 +28,16 @@ public class GameManager : MonoBehaviour
 
     private int points = 0;
     private int life = 3;
+    private int startPoints;
+    private int startLife;
 
-    public void Start()
+    void Awake()
+    {
+        startPoints = points;
+        startLife = life;
+    }
+
+    private void StartGame()
     {
         cameraController = FindFirstObjectByType<CameraController>();
         playerController = FindFirstObjectByType<PlayerController>();
@@ -27,8 +45,23 @@ public class GameManager : MonoBehaviour
         collectableManager = FindFirstObjectByType<CollectableManager>();
         obstacleManager = FindFirstObjectByType<ObstacleManager>();
         lifeManager = FindFirstObjectByType<LifeManager>();
-
         AddDynamicObjects();
+        points = startPoints;
+        SetPointText(points);
+        life = startLife;
+        SetLifeText(life);
+    }
+
+    private void InitialState()
+    {
+
+        if (cameraController)
+            cameraController.Reload();
+        
+        if (playerController)
+            playerController.Reload();
+
+        ClearDynamicObjects();
     }
 
     private void AddDynamicObjects()
@@ -36,19 +69,41 @@ public class GameManager : MonoBehaviour
 
         ClearDynamicObjects();
 
-        collectableManager.SpawnObjects();
-        obstacleManager.SpawnObjects();
+        if (collectableManager)
+            collectableManager.SpawnObjects();
 
-        lifeManager.quantity = 2;
-        lifeManager.SpawnObjects();
+        if (obstacleManager)
+            obstacleManager.SpawnObjects();
+
+        if (lifeManager)
+        {
+            lifeManager.quantity = 2;
+            lifeManager.SpawnObjects();    
+        }
+        
     }
 
     private void ClearDynamicObjects()
     {
-        collectableManager.ClearObjects();
-        obstacleManager.ClearObjects();
-        lifeManager.ClearObjects();
-        
+        if (collectableManager)
+            collectableManager.ClearObjects();
+
+        if (obstacleManager)
+            obstacleManager.ClearObjects();
+
+        if (lifeManager)
+            lifeManager.ClearObjects();
+
+    }
+
+    private void SetLifeText(int lifeValue)
+    {
+        lifeText.text = lifeValue.ToString("D3");
+    }
+    
+    private void SetPointText(int pointValue)
+    {
+        pointsText.text = pointValue.ToString("D5");
     }
 
     public void AdvancePhase()
@@ -65,26 +120,60 @@ public class GameManager : MonoBehaviour
     public void PlayerHit()
     {
         playerController.Hit();
-        if (life > 1)
-        {
-            life -= 1;
-            lifeText.text = life.ToString("D3");    
-        } else
-        {
-            gameOver.SetActive(true);
-        }
+        life -= 1;
+        SetLifeText(life);
+        if (life <= 0)
+            SetGameState(GameState.GameOver);
+        
     }
 
     public void AddPoint()
     {
         points += 10;
-        pointsText.text = points.ToString("D5");
+        SetPointText(points);
     }
-    
+
     public void AddLife()
     {
         life += 1;
-        lifeText.text = life.ToString("D3");
+        SetLifeText(life);
+    }
+
+    public void GameOverTotalScore()
+    {
+        gameOverText.text = points.ToString();
+    }
+    
+    public void SetGameState(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.MainMenu:
+                InitialState();
+                gameOverObject.SetActive(false);
+                menuObject.SetActive(true);
+                gameObject.SetActive(false);
+                gameBarObject.SetActive(false);
+                playerObject.GetComponent<PlayerController>().enabled = false;
+                break;
+            case GameState.Playing:
+                gameOverObject.SetActive(false);
+                menuObject.SetActive(false);
+                gameObject.SetActive(true);
+                this.StartGame();
+                gameBarObject.SetActive(true);
+                playerObject.GetComponent<PlayerController>().enabled = true;
+                break;
+            case GameState.GameOver:
+                GameOverTotalScore();
+                gameOverObject.SetActive(true);
+                playerObject.GetComponent<PlayerController>().enabled = false;
+                break;
+            
+            default:
+                SetGameState(GameState.MainMenu);
+                break;
+        }
     }
 
 }
