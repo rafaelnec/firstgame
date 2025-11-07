@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class BackgroundController : MonoBehaviour
 {
@@ -18,23 +19,32 @@ public class BackgroundController : MonoBehaviour
     }
     public void AdvancePhase()
     {
-
-        Debug.Log("Advancing background phase.");
-        
         if (backgroundSprites == null || backgroundSprites.Count == 0) return;
 
         currentPhase++;
+        SetPhase();
+    }
+
+    public void SetCurrentPhase(int phase)
+    {
+        if (backgroundSprites == null || backgroundSprites.Count == 0) return;
+
+        currentPhase = phase;
+        SetPhase();
+    }
+    
+    private void SetPhase()
+    {
         spriteRenderer.sortingOrder = -1;
 
         if (currentPhase >= backgroundSprites.Count)
-        {
             currentPhase = 0;
+
+        if (currentPhase == 0)
             spriteRenderer.sortingOrder = 1;
-        }
 
         if (spriteRenderer != null)
             spriteRenderer.sprite = backgroundSprites[currentPhase];
-
     }
 
 }

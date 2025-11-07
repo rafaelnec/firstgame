@@ -57,11 +57,15 @@ public class GameManager : MonoBehaviour
 
         if (cameraController)
             cameraController.Reload();
-        
+
         if (playerController)
             playerController.Reload();
 
+        if (background)
+            background.SetCurrentPhase(0);
+
         ClearDynamicObjects();
+        
     }
 
     private void AddDynamicObjects()
