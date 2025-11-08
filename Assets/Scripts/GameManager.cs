@@ -35,9 +35,7 @@ public class GameManager : MonoBehaviour
     private long startPoints;
     private int startLife;
 
-    private float[] weights = { 0f, 0.005f, 0.01f, 0.015f };
-    private int currentWeightIdx = 0;
-    private int countWeightPoints = 0;
+    private int pointsMultipler = 0;
 
     // private int currentPhase = 0;
 
@@ -136,15 +134,16 @@ public class GameManager : MonoBehaviour
 
         AddDynamicObjects();
 
-        playerController.moveSpeed += 1f;
-        playerController.jumpLength -= 1f;
+        // playerController.moveSpeed += 1f;
+        // playerController.jumpLength -= 1f;
 
     }
 
     public void PlayerHit()
     {
         playerController.Hit();
-        countWeightPoints = 0;
+        pointsMultipler = 0;
+        SetMultiplerPointText(pointsMultipler);
         life -= 1;
         SetLifeText(life);
         if (life <= 0)
@@ -154,26 +153,16 @@ public class GameManager : MonoBehaviour
 
     public void AddPoint()
     {
-        countWeightPoints += 1;
-        if (countWeightPoints <= 5)
-            currentWeightIdx = 0;
-        else if (countWeightPoints <= 10)
-            currentWeightIdx = 1;
-        else if (countWeightPoints <= 15)
-            currentWeightIdx = 2;
-        else if (countWeightPoints > 15)
-            currentWeightIdx = 3;
-        else
-            currentWeightIdx = 0;
+        points += 1 + pointsMultipler;
 
-        points += 1;
-        points += (long)(points * weights[currentWeightIdx]);
+        if (pointsMultipler < 100)
+            pointsMultipler += 1;
 
         if (points > 999999999999)
             points = 999999999999;
 
         SetPointText(points);
-        SetMultiplerPointText(currentWeightIdx);
+        SetMultiplerPointText(pointsMultipler);
     }
 
     public void AddLife()
