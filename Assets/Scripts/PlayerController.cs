@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
 
     public float jumpForce = 5.5f;
-    public float jumpLength = -2.5f;
+    public float jumpLength = -2f;
     public float moveSpeed = 5f;
     public float maxXPosition = 31.5f;
     public string groundTag = "Ground";
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody2D rb;
     private Animator animator;
+    private float startMoveSpeed;
+    private float startJumpLength;
 
     void Start()
     {
@@ -20,6 +23,9 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
 
         startPlayerPosition = transform.position;
+        startMoveSpeed = moveSpeed;
+        startJumpLength = jumpLength;
+
         animator.SetBool("isRunning", false);
     }
 
@@ -58,6 +64,8 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isRunning", false);
         rb.AddForceX(-jumpLength, ForceMode2D.Impulse);
         transform.position = startPlayerPosition;
+        moveSpeed = startMoveSpeed;
+        jumpLength = startJumpLength;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -76,6 +84,12 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("Fall");
         animator.SetBool("isRunning", false);
 
+    }
+
+    public void PlayRunning()
+    {
+        AudioManager audioManager = FindFirstObjectByType<AudioManager>();
+        audioManager.PlayerRunningSound();
     }
 
 }

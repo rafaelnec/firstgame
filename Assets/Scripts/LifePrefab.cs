@@ -30,7 +30,7 @@ public class LifePrefab : MonoBehaviour
     
     void OnDynamicObjectColission(Collider2D other)
     {
-    //    if (!string.IsNullOrEmpty(requiredTag) && !other.CompareTag(requiredTag))
-    //         Destroy(gameObject);
+       if (!string.IsNullOrEmpty(requiredTag) && !other.CompareTag(requiredTag))
+            Destroy(other.gameObject);
     }
 }

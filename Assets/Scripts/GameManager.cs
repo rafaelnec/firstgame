@@ -1,9 +1,12 @@
+using System.Collections.Generic;
+using System.Drawing;
 using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI pointsText;
+    public TextMeshProUGUI multiplerPointsText;
     public TextMeshProUGUI lifeText;
     public TextMeshProUGUI gameOverText;
     public GameObject gameOverObject;
@@ -25,11 +28,18 @@ public class GameManager : MonoBehaviour
     private CollectableManager collectableManager;
     private ObstacleManager obstacleManager;
     private LifeManager lifeManager;
+    private AudioManager AudioManager;
 
-    private int points = 0;
+    private long points = 0L;
     private int life = 3;
-    private int startPoints;
+    private long startPoints;
     private int startLife;
+
+    private float[] weights = { 0f, 0.005f, 0.01f, 0.015f };
+    private int currentWeightIdx = 0;
+    private int countWeightPoints = 0;
+
+    // private int currentPhase = 0;
 
     void Awake()
     {
@@ -45,6 +55,8 @@ public class GameManager : MonoBehaviour
         collectableManager = FindFirstObjectByType<CollectableManager>();
         obstacleManager = FindFirstObjectByType<ObstacleManager>();
         lifeManager = FindFirstObjectByType<LifeManager>();
+        AudioManager = FindFirstObjectByType<AudioManager>();
+        
         AddDynamicObjects();
         points = startPoints;
         SetPointText(points);
@@ -104,10 +116,15 @@ public class GameManager : MonoBehaviour
     {
         lifeText.text = lifeValue.ToString("D3");
     }
-    
-    private void SetPointText(int pointValue)
+
+    private void SetPointText(long pointValue)
     {
-        pointsText.text = pointValue.ToString("D5");
+        pointsText.text = pointValue.ToString("D12");
+    }
+    
+    private void SetMultiplerPointText(int multiplerPointsValue)
+    {
+        multiplerPointsText.text = $"x{multiplerPointsValue.ToString()}";
     }
 
     public void AdvancePhase()
@@ -119,11 +136,15 @@ public class GameManager : MonoBehaviour
 
         AddDynamicObjects();
 
+        playerController.moveSpeed += 1f;
+        playerController.jumpLength -= 1f;
+
     }
 
     public void PlayerHit()
     {
         playerController.Hit();
+        countWeightPoints = 0;
         life -= 1;
         SetLifeText(life);
         if (life <= 0)
@@ -133,8 +154,26 @@ public class GameManager : MonoBehaviour
 
     public void AddPoint()
     {
-        points += 10;
+        countWeightPoints += 1;
+        if (countWeightPoints <= 5)
+            currentWeightIdx = 0;
+        else if (countWeightPoints <= 10)
+            currentWeightIdx = 1;
+        else if (countWeightPoints <= 15)
+            currentWeightIdx = 2;
+        else if (countWeightPoints > 15)
+            currentWeightIdx = 3;
+        else
+            currentWeightIdx = 0;
+
+        points += 1;
+        points += (long)(points * weights[currentWeightIdx]);
+
+        if (points > 999999999999)
+            points = 999999999999;
+
         SetPointText(points);
+        SetMultiplerPointText(currentWeightIdx);
     }
 
     public void AddLife()

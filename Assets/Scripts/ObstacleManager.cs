@@ -10,8 +10,8 @@ public class ObstacleManager : MonoBehaviour
 
    public float minOffsetX = -25f;
     public float maxOffsetX = 30f;
-    public float minPaddingX = 3f;
-    public float maxPaddingX = 7f;
+    public float minPaddingX = 4f;
+    public float maxPaddingX = 8f;
 
 
     public void SpawnObjects()
